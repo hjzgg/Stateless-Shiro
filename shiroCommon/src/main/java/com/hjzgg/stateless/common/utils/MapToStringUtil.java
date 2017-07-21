@@ -1,14 +1,18 @@
 package com.hjzgg.stateless.common.utils;
 
-import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.util.ResourceUtils;
 
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by hujunzheng on 2017/7/20.
@@ -56,10 +60,26 @@ public class MapToStringUtil {
     }
 
     public static void main(String[] args) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("name", "hjz");
-        jsonObject.put("age", 25);
+        Stream<List<Integer>> inputStream = Stream.of(
+                Arrays.asList(1),
+                Arrays.asList(2, 3),
+                Arrays.asList(4, 5, 6)
+        );
+//        int haha = inputStream.flatMapToInt((xx) -> {
+//            return xx.stream().mapToInt((x)->{return x;});
+//        }).sum();
 
-        System.out.println(MapToStringUtil.toEqualString(jsonObject, ','));
+
+//        List<Integer> list = inputStream.flatMap((x) -> {
+//            return x.stream().filter((xx) -> {
+//                return (xx&1) == 0;
+//            });
+//        }).collect(Collectors.toList());
+
+        List<Integer> list =inputStream.map((x)->{
+            return x.get(0);
+        }).collect(Collectors.toList());
+
+        System.out.println(list);
     }
 }
