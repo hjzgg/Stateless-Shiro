@@ -2,7 +2,6 @@ package com.hjzgg.stateless.auth.shiro;
 
 import com.hjzgg.stateless.auth.session.ShiroSessionManager;
 import com.hjzgg.stateless.auth.token.ITokenProcessor;
-import com.hjzgg.stateless.auth.token.TokenFactory;
 import com.hjzgg.stateless.auth.token.TokenParameter;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;

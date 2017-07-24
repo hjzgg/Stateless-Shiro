@@ -10,12 +10,16 @@ import java.util.Map;
  */
 public class InvocationInfoProxy {
     private static final ThreadLocal<Map<String, Object>> resources =
-        ThreadLocal.withInitial(() -> {
-            Map<String, Object> initialValue = new HashMap<>();
-            initialValue.put(AuthConstants.ExtendConstants.PARAM_PARAMETER, new HashMap<String, String>());
-            return initialValue;
-        }
-    );
+            ThreadLocal.withInitial(() -> {
+                        Map<String, Object> initialValue = new HashMap<>();
+                        initialValue.put(AuthConstants.ExtendConstants.PARAM_PARAMETER, new HashMap<String, String>());
+                        return initialValue;
+                    }
+            );
+
+    public static Map<String, Object> getResources() {
+        return resources.get();
+    }
 
     public static String getUserName() {
         return (String) resources.get().get(AuthConstants.PARAM_USERNAME);

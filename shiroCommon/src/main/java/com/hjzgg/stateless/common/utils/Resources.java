@@ -172,6 +172,19 @@ public class Resources {
             return new ClassPathResource(resource).getInputStream();
         }
     }
+
+    public static void main(String[] args) {
+        try {
+            PathMatchingResourcePatternResolver p = new PathMatchingResourcePatternResolver();
+            BufferedReader br = new BufferedReader(new InputStreamReader(p.getResources("classpath:com/**/Resources.class")[0].getInputStream()));
+            String str = null;
+            while ((str = br.readLine()) != null) {
+                System.out.println(str);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 class ClassLoaderWrapper {

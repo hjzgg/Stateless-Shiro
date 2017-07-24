@@ -7,6 +7,7 @@ import com.hjzgg.stateless.auth.token.TokenParameter;
 import com.hjzgg.stateless.common.constants.AuthConstants;
 import com.hjzgg.stateless.common.utils.CookieUtil;
 import com.hjzgg.stateless.common.utils.InvocationInfoProxy;
+import com.hjzgg.stateless.common.utils.MapToStringUtil;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -252,6 +253,7 @@ public class StatelessAuthcFilter extends AccessControlFilter {
 	}
 	
 	protected void initCustomMDC() {
+		MDC.put("InvocationInfoProxy", MapToStringUtil.toEqualString(InvocationInfoProxy.getResources(), ';'));
 	}
 
 	protected void afterValidate(HttpServletRequest hReq){
@@ -265,6 +267,7 @@ public class StatelessAuthcFilter extends AccessControlFilter {
 	}
 
 	protected void clearCustomMDC() {
+		MDC.remove("InvocationInfoProxy");
 	}
 
 	//初始化 AuthConstants类中定义的常量
